@@ -1,0 +1,64 @@
+#
+# User Roles
+#
+# The API supports two roles for users:
+#
+# - "consumer": Default role. Can use the app as a regular user.
+# - "creator": Special role. Can create/upload content in the app.
+#
+# When registering, you can specify the role as either "consumer" or "creator".
+# If not provided, the role will default to "consumer".
+
+# Example API Requests and Responses for Register and Login
+
+## Register (POST /api/auth/register)
+
+### Request (JSON):
+{
+  "username": "testuser",
+  "email": "testuser@example.com",
+  "password": "yourpassword",
+  "role": "creator"
+}
+
+### Successful Response (201):
+{
+  "message": "User registered successfully"
+}
+
+### Error Response (400):
+{
+  "message": "User already exists"
+}
+
+---
+
+## Login (POST /api/auth/login)
+
+### Request (JSON):
+{
+  "username": "testuser",
+  "password": "yourpassword"
+}
+
+# OR
+{
+  "email": "testuser@example.com",
+  "password": "yourpassword"
+}
+
+### Successful Response (200):
+{
+  "token": "<JWT_TOKEN>",
+  "user": {
+    "id": "<user_id>",
+    "username": "testuser",
+    "email": "testuser@example.com",
+    "role": "creator"
+  }
+}
+
+### Error Response (401):
+{
+  "message": "Invalid credentials"
+}
